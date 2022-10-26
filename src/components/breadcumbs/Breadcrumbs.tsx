@@ -4,7 +4,7 @@ const getNavLinkClass = ({ isActive }: { isActive: boolean }) =>
   isActive
     ? "text-blue-600 cursor-default pointer-events-none"
     : "text-gray-500";
-const Breadcumbs = () => {
+const Breadcrumbs = () => {
   const { pathname } = useLocation();
   if (pathname === "/") return null;
   return (
@@ -23,4 +23,4 @@ const Breadcumbs = () => {
   );
 };
 
-export default Breadcumbs;
+export default Breadcrumbs;

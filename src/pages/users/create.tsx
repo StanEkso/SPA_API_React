@@ -1,11 +1,11 @@
 import React from "react";
 import { ActionFunction, Form } from "react-router-dom";
-import Breadcumbs from "../components/breadcumbs/Breadcrumbs";
+import Breadcrumbs from "../../components/breadcumbs/Breadcrumbs";
 
 const CreateUser = () => {
   return (
     <>
-      <Breadcumbs />
+      <Breadcrumbs />
       <Form
         method="post"
         action="/users/create"

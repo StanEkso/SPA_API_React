@@ -1,12 +1,12 @@
 import React, { Suspense } from "react";
 import { Await, LoaderFunctionArgs, useLoaderData } from "react-router-dom";
-import AlbumList from "../components/albumlist/AlbumList";
-import Breadcumbs from "../components/breadcumbs/Breadcrumbs";
-import Loader from "../components/loader/Loader";
-import UserCard from "../components/usercard/UserCard";
-import { Album } from "../types/album";
-import { User } from "../types/user";
-import NotFound from "./NotFound";
+import AlbumList from "../../components/albumlist/AlbumList";
+import Breadcrumbs from "../../components/breadcumbs/Breadcrumbs";
+import Loader from "../../components/loader/Loader";
+import UserCard from "../../components/usercard/UserCard";
+import { Album } from "../../types/album";
+import { User } from "../../types/user";
+import NotFoundPage from "../404";
 
 const UserPage = () => {
   const { userPromise, albumsPromise } = useLoaderData() as Awaited<
@@ -14,17 +14,17 @@ const UserPage = () => {
   >;
   return (
     <>
-      <Breadcumbs />
+      <Breadcrumbs />
       <div className="grid lg:grid-cols-[1fr_2fr] gap-8">
         <Suspense fallback={<Loader />}>
           <Await
             resolve={userPromise}
-            errorElement={<NotFound />}
+            errorElement={<NotFoundPage />}
             children={(user) => <UserCard {...user} />}
           />
           <Await
             resolve={albumsPromise}
-            errorElement={<NotFound />}
+            errorElement={<NotFoundPage />}
             children={(albums) => <AlbumList albums={albums} />}
           />
         </Suspense>

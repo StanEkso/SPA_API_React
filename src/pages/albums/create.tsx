@@ -1,14 +1,14 @@
 import React, { Suspense } from "react";
 import { ActionFunction, Await, Form, useLoaderData } from "react-router-dom";
-import Breadcumbs from "../components/breadcumbs/Breadcrumbs";
-import { User } from "../types/user";
-import { loader as usersLoader } from "./UsersPage";
+import Breadcrumbs from "../../components/breadcumbs/Breadcrumbs";
+import { User } from "../../types/user";
+import { loader as usersLoader } from "../users/";
 
 const CreateAlbum = () => {
   const { userPromise } = useLoaderData() as ReturnType<typeof usersLoader>;
   return (
     <>
-      <Breadcumbs />
+      <Breadcrumbs />
       <Form
         method="post"
         action="/albums/create"

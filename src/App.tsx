@@ -1,19 +1,25 @@
 import React from "react";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
 import Layout from "./components/layout/Layout";
-import AlbumPage, { loader as albumLoader } from "./pages/AlbumPage";
-import Albums, { loader as albumsLoader } from "./pages/Albums";
-import UsersPage, { loader as usersPageLoader } from "./pages/UsersPage";
-import NotFound from "./pages/NotFound";
-import UserPage, { loader as userLoader } from "./pages/UserPage";
-import MainPage from "./pages/MainPage";
-import CreateUser, { action as createUserAction } from "./pages/CreateUser";
-import CreateAlbum, { action as createAlbumAction } from "./pages/CreateAlbum";
+import AlbumPage, { loader as albumLoader } from "./pages/albums/[id]";
+import UsersPage, { loader as usersPageLoader } from "./pages/users/";
+import NotFoundPage from "./pages/404";
+import UserPage, { loader as userLoader } from "./pages/users/[id]";
+import MainPage from "./pages";
+import CreateUser, { action as createUserAction } from "./pages/users/create";
+import CreateAlbum, {
+  action as createAlbumAction,
+} from "./pages/albums/create";
+import Albums, { loader as albumsLoader } from "./pages/albums";
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
-    errorElement: <NotFound />,
+    errorElement: <Navigate to="/404" />,
     children: [
       {
         path: "/",
@@ -50,6 +56,10 @@ const router = createBrowserRouter([
         element: <CreateAlbum />,
         loader: usersPageLoader,
         action: createAlbumAction,
+      },
+      {
+        path: "/404",
+        element: <NotFoundPage />,
       },
     ],
   },

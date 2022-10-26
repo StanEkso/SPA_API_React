@@ -5,12 +5,12 @@ import {
   LoaderFunctionArgs,
   useLoaderData,
 } from "react-router-dom";
-import Breadcumbs from "../components/breadcumbs/Breadcrumbs";
-import Loader from "../components/loader/Loader";
-import PhotoList from "../components/photo/PhotoList";
-import { Album } from "../types/album";
-import { User } from "../types/user";
-import NotFound from "./NotFound";
+import Breadcrumbs from "../../components/breadcumbs/Breadcrumbs";
+import Loader from "../../components/loader/Loader";
+import PhotoList from "../../components/photo/PhotoList";
+import { Album } from "../../types/album";
+import { User } from "../../types/user";
+import NotFoundPage from "../404";
 
 const AlbumPage = () => {
   const { album, photosPromise, userPromise } = useLoaderData() as Awaited<
@@ -18,7 +18,7 @@ const AlbumPage = () => {
   >;
   return (
     <div>
-      <Breadcumbs />
+      <Breadcrumbs />
       <Suspense fallback={<Loader />}>
         <div className="mb-4">
           <h3 className="font-bold mb-2 text-2xl">{album.title}</h3>
@@ -39,7 +39,7 @@ const AlbumPage = () => {
         </div>
         <Await
           resolve={photosPromise}
-          errorElement={<NotFound />}
+          errorElement={<NotFoundPage />}
           children={(photos) => <PhotoList photos={photos} />}
         />
       </Suspense>
