@@ -5,7 +5,7 @@ import {
   LoaderFunctionArgs,
   useLoaderData,
 } from "react-router-dom";
-import Breadcumbs from "../components/breadcumbs/Breadcumbs";
+import Breadcumbs from "../components/breadcumbs/Breadcrumbs";
 import Loader from "../components/loader/Loader";
 import PhotoList from "../components/photo/PhotoList";
 import { Album } from "../types/album";

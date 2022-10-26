@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
 import { Await, useLoaderData } from "react-router-dom";
 import AlbumList from "../components/albumlist/AlbumList";
-import Breadcumbs from "../components/breadcumbs/Breadcumbs";
+import Breadcumbs from "../components/breadcumbs/Breadcrumbs";
 import Loader from "../components/loader/Loader";
 const Albums = () => {
   const { albumsPromise } = useLoaderData() as ReturnType<typeof loader>;

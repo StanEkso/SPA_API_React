@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
 import { Await, LoaderFunctionArgs, useLoaderData } from "react-router-dom";
 import AlbumList from "../components/albumlist/AlbumList";
-import Breadcumbs from "../components/breadcumbs/Breadcumbs";
+import Breadcumbs from "../components/breadcumbs/Breadcrumbs";
 import Loader from "../components/loader/Loader";
 import UserCard from "../components/usercard/UserCard";
 import { Album } from "../types/album";

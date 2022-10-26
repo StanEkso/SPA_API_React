@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 import { useLoaderData, Await } from "react-router-dom";
-import Breadcumbs from "../components/breadcumbs/Breadcumbs";
+import Breadcumbs from "../components/breadcumbs/Breadcrumbs";
 import Loader from "../components/loader/Loader";
 import UserList from "../components/userlist/UserList";
 import { User } from "../types/user";
