@@ -22,7 +22,7 @@ const UserCard: FC<Props> = ({
           alt="Geoposition"
           className="h-4"
         />
-        {email}
+        <a href={"mailto:" + email}>{email}</a>
       </p>
       <p className="flex gap-2 items-center">
         <img
@@ -33,7 +33,7 @@ const UserCard: FC<Props> = ({
         <a href={"tel:+" + phone}>{phone}</a>
       </p>
       <p>
-        <a href={website}>{website}</a>
+        <a href={"https://" + website}>{"https://" + website}</a>
       </p>
       <p className="flex gap-2 items-center">
         <img

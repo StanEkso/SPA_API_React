@@ -9,8 +9,8 @@ import { User } from "../types/user";
 import NotFound from "./NotFound";
 
 const UserPage = () => {
-  const { userPromise, albumsPromise } = useLoaderData() as ReturnType<
-    typeof loader
+  const { userPromise, albumsPromise } = useLoaderData() as Awaited<
+    ReturnType<typeof loader>
   >;
   return (
     <>
@@ -34,13 +34,16 @@ const UserPage = () => {
 };
 
 export default UserPage;
-export const loader = ({ params }: LoaderFunctionArgs) => {
+export const loader = async ({ params }: LoaderFunctionArgs) => {
   const { id } = params;
-  const userPromise: Promise<User> = fetch(
+  const userPromise = await fetch(
     `https://jsonplaceholder.typicode.com/users/${id}`
-  ).then((r) => r.json());
+  );
+  if (userPromise.status !== 200) {
+    throw new Response("Not found", { status: 404 });
+  }
   const albumsPromise: Promise<Album[]> = fetch(
     `https://jsonplaceholder.typicode.com/users/${id}/albums`
   ).then((r) => r.json());
-  return { userPromise, albumsPromise };
+  return { userPromise: userPromise.json() as Promise<User>, albumsPromise };
 };
