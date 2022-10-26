@@ -15,13 +15,14 @@ const CreateAlbum = () => {
         className="grid max-w-3xl mx-auto"
       >
         <label htmlFor="">Owner</label>
-
         <Suspense>
           <Await resolve={userPromise}>
             {(users) => (
-              <select>
-                {users.map((user: User) => (
-                  <option value={user.id}>{user.name}</option>
+              <select className="rounded-sm border-2 px-2 py-1 mb-2">
+                {users.map(({ id, name }: User) => (
+                  <option value={id} key={id}>
+                    {name}
+                  </option>
                 ))}
               </select>
             )}
@@ -36,7 +37,7 @@ const CreateAlbum = () => {
         />
         <button
           type="submit"
-          className="rounded-sm border-2 px-2 py-1 block bg-slate-500 text-white"
+          className="rounded-sm px-2 py-1 block bg-blue-500 text-white"
         >
           Create
         </button>

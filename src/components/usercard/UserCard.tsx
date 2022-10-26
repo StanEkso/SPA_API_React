@@ -19,22 +19,29 @@ const UserCard: FC<Props> = ({
       <p className="flex gap-2 items-center">
         <img
           src=" https://cdn-icons-png.flaticon.com/512/561/561127.png"
-          alt="Geoposition"
+          alt="Mail icon"
           className="h-4"
         />
         <a href={"mailto:" + email}>{email}</a>
       </p>
+
       <p className="flex gap-2 items-center">
         <img
           src="https://www.iconpacks.net/icons/1/free-phone-icon-1-thumb.png"
-          alt="Geoposition"
+          alt="Phone icon"
           className="h-4"
         />
         <a href={"tel:+" + phone}>{phone}</a>
       </p>
-      <p>
+      <p className="flex gap-2 items-center">
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/1006/1006771.png"
+          alt="Website Icon"
+          className="h-4"
+        />
         <a href={"https://" + website}>{"https://" + website}</a>
       </p>
+      <p></p>
       <p className="flex gap-2 items-center">
         <img
           src="https://cdn-icons-png.flaticon.com/512/2527/2527411.png"

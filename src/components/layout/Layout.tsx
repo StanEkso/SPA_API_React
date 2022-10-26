@@ -35,7 +35,7 @@ const Layout: FC = () => {
               StanEkso
             </a>
           </p>
-          <p>BSU, 2022</p>
+          <p>2022</p>
         </div>
       </footer>
     </div>

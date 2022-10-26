@@ -15,7 +15,7 @@ const UserPage = () => {
   return (
     <>
       <Breadcrumbs />
-      <div className="grid lg:grid-cols-[1fr_2fr] gap-8">
+      <div className="grid md:grid-cols-[1fr_2fr] gap-8 lg:gap-10 xl:gap-12">
         <Suspense fallback={<Loader />}>
           <Await
             resolve={userPromise}

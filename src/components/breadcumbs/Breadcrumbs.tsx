@@ -17,6 +17,7 @@ const Breadcrumbs = () => {
           className={getNavLinkClass}
         >
           {el}
+          {i < arr.length - 1 ? " >" : ""}
         </NavLink>
       ))}
     </div>
