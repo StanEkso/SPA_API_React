@@ -12,4 +12,4 @@ const PhotoCard: FC<Props> = ({ title, url }) => {
   );
 };
 
-export default PhotoCard;
+export default React.memo(PhotoCard);

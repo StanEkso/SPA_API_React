@@ -1,10 +1,16 @@
 import React from "react";
+import { FC } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 const getNavLinkClass = ({ isActive }: { isActive: boolean }) =>
   isActive
     ? "text-blue-600 cursor-default pointer-events-none"
     : "text-gray-500";
-const Breadcrumbs = () => {
+
+interface BreadcrumbsProps {
+  separator?: string;
+}
+
+const Breadcrumbs: FC<BreadcrumbsProps> = ({ separator = " >" }) => {
   const { pathname } = useLocation();
   if (pathname === "/") return null;
   return (
@@ -17,11 +23,11 @@ const Breadcrumbs = () => {
           className={getNavLinkClass}
         >
           {el}
-          {i < arr.length - 1 ? " >" : ""}
+          {i < arr.length - 1 ? separator : ""}
         </NavLink>
       ))}
     </div>
   );
 };
 
-export default Breadcrumbs;
+export default React.memo(Breadcrumbs);

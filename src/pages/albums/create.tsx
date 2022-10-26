@@ -4,7 +4,7 @@ import Breadcrumbs from "../../components/breadcumbs/Breadcrumbs";
 import { User } from "../../types/user";
 import { loader as usersLoader } from "../users/";
 
-const CreateAlbum = () => {
+const CreateAlbumPage = () => {
   const { userPromise } = useLoaderData() as ReturnType<typeof usersLoader>;
   return (
     <>
@@ -15,19 +15,21 @@ const CreateAlbum = () => {
         className="grid max-w-3xl mx-auto"
       >
         <label htmlFor="">Owner</label>
-        <Suspense>
-          <Await resolve={userPromise}>
-            {(users) => (
-              <select className="rounded-sm border-2 px-2 py-1 mb-2">
-                {users.map(({ id, name }: User) => (
-                  <option value={id} key={id}>
-                    {name}
-                  </option>
-                ))}
-              </select>
-            )}
-          </Await>
-        </Suspense>
+        <select className="rounded-sm border-2 px-2 py-1 mb-2">
+          <Suspense>
+            <Await resolve={userPromise}>
+              {(users) => (
+                <>
+                  {users.map(({ id, name }: User) => (
+                    <option value={id} key={id}>
+                      {name}
+                    </option>
+                  ))}
+                </>
+              )}
+            </Await>
+          </Suspense>
+        </select>
         <label htmlFor="">Title</label>
         <input
           type="text"
@@ -46,8 +48,8 @@ const CreateAlbum = () => {
   );
 };
 
-export default CreateAlbum;
-export const action: ActionFunction = async ({ request, params }) => {
+export default CreateAlbumPage;
+export const action: ActionFunction = async ({ request }) => {
   const form = await request.formData();
   console.log(...form);
 };

@@ -3,7 +3,7 @@ import { Await, useLoaderData } from "react-router-dom";
 import AlbumList from "../../components/albumlist/AlbumList";
 import Breadcrumbs from "../../components/breadcumbs/Breadcrumbs";
 import Loader from "../../components/loader/Loader";
-const Albums = () => {
+const AlbumsPage = () => {
   const { albumsPromise } = useLoaderData() as ReturnType<typeof loader>;
   return (
     <>
@@ -18,7 +18,7 @@ const Albums = () => {
   );
 };
 
-export default Albums;
+export default AlbumsPage;
 export const loader = () => {
   const albumsPromise = fetch(
     "https://jsonplaceholder.typicode.com/albums"

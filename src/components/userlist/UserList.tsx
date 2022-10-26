@@ -2,11 +2,11 @@ import React, { FC } from "react";
 import { Link } from "react-router-dom";
 import { User } from "../../types/user";
 
-interface Props {
+interface UserListProps {
   users: User[];
 }
 
-const UserList: FC<Props> = ({ users }) => {
+const UserList: FC<UserListProps> = ({ users }) => {
   return (
     <div>
       <h3 className="font-bold mb-2 text-2xl">Users</h3>
@@ -24,4 +24,4 @@ const UserList: FC<Props> = ({ users }) => {
   );
 };
 
-export default UserList;
+export default React.memo(UserList);

@@ -54,4 +54,4 @@ const UserCard: FC<Props> = ({
   );
 };
 
-export default UserCard;
+export default React.memo(UserCard);

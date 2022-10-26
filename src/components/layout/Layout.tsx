@@ -42,4 +42,4 @@ const Layout: FC = () => {
   );
 };
 
-export default Layout;
+export default React.memo(Layout);

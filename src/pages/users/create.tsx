@@ -2,7 +2,7 @@ import React from "react";
 import { ActionFunction, Form } from "react-router-dom";
 import Breadcrumbs from "../../components/breadcumbs/Breadcrumbs";
 
-const CreateUser = () => {
+const CreateUserPage = () => {
   return (
     <>
       <Breadcrumbs />
@@ -66,7 +66,7 @@ const CreateUser = () => {
   );
 };
 
-export default CreateUser;
+export default CreateUserPage;
 export const action: ActionFunction = async ({ request, params }) => {
   const form = await request.formData();
   fetch("https://jsonplaceholder.typicode.com/users", {

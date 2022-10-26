@@ -10,11 +10,13 @@ import UsersPage, { loader as usersPageLoader } from "./pages/users/";
 import NotFoundPage from "./pages/404";
 import UserPage, { loader as userLoader } from "./pages/users/[id]";
 import MainPage from "./pages";
-import CreateUser, { action as createUserAction } from "./pages/users/create";
-import CreateAlbum, {
+import CreateUserPage, {
+  action as createUserAction,
+} from "./pages/users/create";
+import CreateAlbumPage, {
   action as createAlbumAction,
 } from "./pages/albums/create";
-import Albums, { loader as albumsLoader } from "./pages/albums";
+import AlbumsPage, { loader as albumsLoader } from "./pages/albums";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -29,7 +31,7 @@ const router = createBrowserRouter([
       {
         path: "/albums",
         loader: albumsLoader,
-        element: <Albums />,
+        element: <AlbumsPage />,
       },
       {
         path: "/users/",
@@ -38,7 +40,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/users/create",
-        element: <CreateUser />,
+        element: <CreateUserPage />,
         action: createUserAction,
       },
       {
@@ -53,7 +55,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/albums/create",
-        element: <CreateAlbum />,
+        element: <CreateAlbumPage />,
         loader: usersPageLoader,
         action: createAlbumAction,
       },

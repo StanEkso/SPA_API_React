@@ -2,11 +2,11 @@ import React, { FC } from "react";
 import { Photo } from "../../types/photo";
 import PhotoCard from "./PhotoCard";
 
-interface Props {
+interface PhotoListProps {
   photos: Photo[];
 }
 
-const PhotoList: FC<Props> = ({ photos }) => {
+const PhotoList: FC<PhotoListProps> = ({ photos }) => {
   return (
     <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
       {photos.map((photo) => (
@@ -16,4 +16,4 @@ const PhotoList: FC<Props> = ({ photos }) => {
   );
 };
 
-export default PhotoList;
+export default React.memo(PhotoList);
