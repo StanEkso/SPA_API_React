@@ -4,7 +4,7 @@ import Layout from "./components/layout/Layout";
 import Albums from "./pages/Albums";
 import MainPage, { loader as mainPageLoader } from "./pages/MainPage";
 import NotFound from "./pages/NotFound";
-import UserPage from "./pages/UserPage";
+import UserPage, { loader as userLoader } from "./pages/UserPage";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -15,15 +15,19 @@ const router = createBrowserRouter([
         path: "/",
         element: <MainPage />,
         loader: mainPageLoader,
+        errorElement: <NotFound />,
         index: true,
       },
       {
         path: "/albums",
+        errorElement: <NotFound />,
         element: <Albums />,
       },
       {
         path: "/users/:id",
         element: <UserPage />,
+        loader: userLoader,
+        errorElement: <NotFound />,
       },
     ],
   },

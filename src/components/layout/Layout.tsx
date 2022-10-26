@@ -8,7 +8,7 @@ const Layout: FC = () => {
       <header className="">
         <div className="mx-3 sm:mx-5 md:mx-8 lg:mx-14 xl:mx-20 2xl:mx-32 text-xl flex py-2">
           <h1 className="font-bold">SPA</h1>
-          <div className="ml-auto flex space-x-2">
+          <div className="ml-auto flex space-x-4">
             <NavLink end to={"/"} className={getNavLinkClass}>
               Main
             </NavLink>
