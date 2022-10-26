@@ -7,6 +7,8 @@ import UsersPage, { loader as usersPageLoader } from "./pages/UsersPage";
 import NotFound from "./pages/NotFound";
 import UserPage, { loader as userLoader } from "./pages/UserPage";
 import MainPage from "./pages/MainPage";
+import CreateUser, { action as createUserAction } from "./pages/CreateUser";
+import CreateAlbum, { action as createAlbumAction } from "./pages/CreateAlbum";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -16,12 +18,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <MainPage />,
-        errorElement: <NotFound />,
         index: true,
       },
       {
         path: "/albums",
-        errorElement: <NotFound />,
         loader: albumsLoader,
         element: <Albums />,
       },
@@ -29,19 +29,27 @@ const router = createBrowserRouter([
         path: "/users/",
         element: <UsersPage />,
         loader: usersPageLoader,
-        errorElement: <NotFound />,
+      },
+      {
+        path: "/users/create",
+        element: <CreateUser />,
+        action: createUserAction,
       },
       {
         path: "/users/:id",
         element: <UserPage />,
         loader: userLoader,
-        errorElement: <NotFound />,
       },
       {
         path: "/albums/:id",
         element: <AlbumPage />,
         loader: albumLoader,
-        errorElement: <NotFound />,
+      },
+      {
+        path: "/albums/create",
+        element: <CreateAlbum />,
+        loader: usersPageLoader,
+        action: createAlbumAction,
       },
     ],
   },

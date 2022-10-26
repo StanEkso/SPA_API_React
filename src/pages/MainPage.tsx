@@ -12,6 +12,12 @@ const MainPage = () => {
         <div className="rounded-sm border-2 p-3 my-2 hover:border-blue-500 cursor-pointer">
           <Link to="/albums">Check albums</Link>
         </div>
+        <div className="rounded-sm border-2 p-3 my-2 hover:border-blue-500 cursor-pointer">
+          <Link to="/users/create">Create user</Link>
+        </div>
+        <div className="rounded-sm border-2 p-3 my-2 hover:border-blue-500 cursor-pointer">
+          <Link to="/albums/create">Create album</Link>
+        </div>
       </div>
     </div>
   );
