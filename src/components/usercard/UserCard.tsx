@@ -15,16 +15,34 @@ const UserCard: FC<Props> = ({
     <div className="rounded-md p-4 border-2">
       <h3 className="font-bold">{name}</h3>
       <p>Username: {username}</p>
-      <p>
-        Email: <a href={`mailto:${email}`}>{email}</a>
+
+      <p className="flex gap-2 items-center">
+        <img
+          src=" https://cdn-icons-png.flaticon.com/512/561/561127.png"
+          alt="Geoposition"
+          className="h-4"
+        />
+        {email}
+      </p>
+      <p className="flex gap-2 items-center">
+        <img
+          src="https://www.iconpacks.net/icons/1/free-phone-icon-1-thumb.png"
+          alt="Geoposition"
+          className="h-4"
+        />
+        <a href={"tel:+" + phone}>{phone}</a>
       </p>
       <p>
-        Phone: <a href={"tel:+" + phone}>{phone}</a>
+        <a href={website}>{website}</a>
       </p>
-      <p>
-        Site: <a href={website}>{website}</a>
+      <p className="flex gap-2 items-center">
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/2527/2527411.png"
+          alt="Geoposition"
+          className="h-4"
+        />
+        {address.city}, {address.street}
       </p>
-      <p>{address.street}</p>
     </div>
   );
 };

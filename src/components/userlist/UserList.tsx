@@ -9,7 +9,7 @@ interface Props {
 const UserList: FC<Props> = ({ users }) => {
   return (
     <div>
-      <h3>User count: {users.length}</h3>
+      <h3 className="font-bold mb-2 text-2xl">Users</h3>
       {users.map((user) => (
         <div key={user.id}>
           <Link

@@ -1,7 +1,25 @@
-import React from "react";
-
+import React, { Suspense } from "react";
+import { Await, useLoaderData } from "react-router-dom";
+import AlbumList from "../components/albumlist/AlbumList";
+import Loader from "../components/loader/Loader";
 const Albums = () => {
-  return <div>Albums</div>;
+  const { albumsPromise } = useLoaderData() as ReturnType<typeof loader>;
+  return (
+    <Suspense fallback={<Loader />}>
+      <Await
+        resolve={albumsPromise}
+        children={(albums) => <AlbumList albums={albums} />}
+      />
+    </Suspense>
+  );
 };
 
 export default Albums;
+export const loader = () => {
+  const albumsPromise = fetch(
+    "https://jsonplaceholder.typicode.com/albums"
+  ).then((r) => r.json());
+  return {
+    albumsPromise,
+  };
+};

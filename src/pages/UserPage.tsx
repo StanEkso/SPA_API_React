@@ -11,7 +11,7 @@ const UserPage = () => {
     typeof loader
   >;
   return (
-    <div className="lg:grid grid-cols-[1fr_2fr] gap-8">
+    <div className="grid lg:grid-cols-[1fr_2fr] gap-8">
       <Suspense fallback={<Loader />}>
         <Await
           resolve={userPromise}
