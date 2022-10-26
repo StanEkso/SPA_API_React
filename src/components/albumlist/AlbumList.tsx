@@ -7,6 +7,7 @@ interface Props {
 }
 
 const AlbumList: FC<Props> = ({ albums }) => {
+  if (!albums.length) return null;
   return (
     <div>
       <h3 className="font-bold mb-2 text-2xl">Albums</h3>

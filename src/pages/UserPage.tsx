@@ -5,6 +5,7 @@ import Loader from "../components/loader/Loader";
 import UserCard from "../components/usercard/UserCard";
 import { Album } from "../types/album";
 import { User } from "../types/user";
+import NotFound from "./NotFound";
 
 const UserPage = () => {
   const { userPromise, albumsPromise } = useLoaderData() as ReturnType<
@@ -15,10 +16,12 @@ const UserPage = () => {
       <Suspense fallback={<Loader />}>
         <Await
           resolve={userPromise}
+          errorElement={<NotFound />}
           children={(user) => <UserCard {...user} />}
         />
         <Await
           resolve={albumsPromise}
+          errorElement={<NotFound />}
           children={(albums) => <AlbumList albums={albums} />}
         />
       </Suspense>
@@ -29,14 +32,9 @@ const UserPage = () => {
 export default UserPage;
 export const loader = ({ params }: LoaderFunctionArgs) => {
   const { id } = params;
-  const userPromise: Promise<User> = new Promise((resolve) => {
-    setTimeout(() => {
-      const user = fetch(
-        `https://jsonplaceholder.typicode.com/users/${id}`
-      ).then((r) => r.json());
-      resolve(user);
-    }, 500);
-  });
+  const userPromise: Promise<User> = fetch(
+    `https://jsonplaceholder.typicode.com/users/${id}`
+  ).then((r) => r.json());
   const albumsPromise: Promise<Album[]> = fetch(
     `https://jsonplaceholder.typicode.com/users/${id}/albums`
   ).then((r) => r.json());

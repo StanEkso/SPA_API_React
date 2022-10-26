@@ -12,7 +12,7 @@ const UserCard: FC<Props> = ({
   address,
 }) => {
   return (
-    <div className="rounded-md p-4 border-2">
+    <div className="rounded-md p-4 border-2 flex flex-col gap-1">
       <h3 className="font-bold">{name}</h3>
       <p>Username: {username}</p>
 
@@ -41,7 +41,7 @@ const UserCard: FC<Props> = ({
           alt="Geoposition"
           className="h-4"
         />
-        {address.city}, {address.street}
+        {address?.city}, {address?.street}
       </p>
     </div>
   );

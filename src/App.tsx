@@ -1,6 +1,7 @@
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "./components/layout/Layout";
+import AlbumPage, { loader as albumLoader } from "./pages/AlbumPage";
 import Albums, { loader as albumsLoader } from "./pages/Albums";
 import MainPage, { loader as mainPageLoader } from "./pages/MainPage";
 import NotFound from "./pages/NotFound";
@@ -28,6 +29,12 @@ const router = createBrowserRouter([
         path: "/users/:id",
         element: <UserPage />,
         loader: userLoader,
+        errorElement: <NotFound />,
+      },
+      {
+        path: "/albums/:id",
+        element: <AlbumPage />,
+        loader: albumLoader,
         errorElement: <NotFound />,
       },
     ],
