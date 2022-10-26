@@ -5,6 +5,7 @@ import {
   LoaderFunctionArgs,
   useLoaderData,
 } from "react-router-dom";
+import Breadcumbs from "../components/breadcumbs/Breadcumbs";
 import Loader from "../components/loader/Loader";
 import PhotoList from "../components/photo/PhotoList";
 import { Album } from "../types/album";
@@ -17,6 +18,7 @@ const AlbumPage = () => {
   >;
   return (
     <div>
+      <Breadcumbs />
       <Suspense fallback={<Loader />}>
         <div className="mb-4">
           <h3 className="font-bold mb-2 text-2xl">{album.title}</h3>

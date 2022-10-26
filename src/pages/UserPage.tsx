@@ -1,6 +1,7 @@
 import React, { Suspense } from "react";
 import { Await, LoaderFunctionArgs, useLoaderData } from "react-router-dom";
 import AlbumList from "../components/albumlist/AlbumList";
+import Breadcumbs from "../components/breadcumbs/Breadcumbs";
 import Loader from "../components/loader/Loader";
 import UserCard from "../components/usercard/UserCard";
 import { Album } from "../types/album";
@@ -12,20 +13,23 @@ const UserPage = () => {
     typeof loader
   >;
   return (
-    <div className="grid lg:grid-cols-[1fr_2fr] gap-8">
-      <Suspense fallback={<Loader />}>
-        <Await
-          resolve={userPromise}
-          errorElement={<NotFound />}
-          children={(user) => <UserCard {...user} />}
-        />
-        <Await
-          resolve={albumsPromise}
-          errorElement={<NotFound />}
-          children={(albums) => <AlbumList albums={albums} />}
-        />
-      </Suspense>
-    </div>
+    <>
+      <Breadcumbs />
+      <div className="grid lg:grid-cols-[1fr_2fr] gap-8">
+        <Suspense fallback={<Loader />}>
+          <Await
+            resolve={userPromise}
+            errorElement={<NotFound />}
+            children={(user) => <UserCard {...user} />}
+          />
+          <Await
+            resolve={albumsPromise}
+            errorElement={<NotFound />}
+            children={(albums) => <AlbumList albums={albums} />}
+          />
+        </Suspense>
+      </div>
+    </>
   );
 };
 

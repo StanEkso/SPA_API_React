@@ -3,9 +3,10 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "./components/layout/Layout";
 import AlbumPage, { loader as albumLoader } from "./pages/AlbumPage";
 import Albums, { loader as albumsLoader } from "./pages/Albums";
-import MainPage, { loader as mainPageLoader } from "./pages/MainPage";
+import UsersPage, { loader as usersPageLoader } from "./pages/UsersPage";
 import NotFound from "./pages/NotFound";
 import UserPage, { loader as userLoader } from "./pages/UserPage";
+import MainPage from "./pages/MainPage";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -15,7 +16,6 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <MainPage />,
-        loader: mainPageLoader,
         errorElement: <NotFound />,
         index: true,
       },
@@ -24,6 +24,12 @@ const router = createBrowserRouter([
         errorElement: <NotFound />,
         loader: albumsLoader,
         element: <Albums />,
+      },
+      {
+        path: "/users/",
+        element: <UsersPage />,
+        loader: usersPageLoader,
+        errorElement: <NotFound />,
       },
       {
         path: "/users/:id",

@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 const getNavLinkClass = ({ isActive }: { isActive: boolean }) =>
-  isActive ? "text-black underline" : "text-black";
+  isActive ? "text-black underline underline-offset-4" : "text-gray-500";
 const Layout: FC = () => {
   return (
     <div>
@@ -11,6 +11,9 @@ const Layout: FC = () => {
           <div className="ml-auto flex space-x-4">
             <NavLink end to={"/"} className={getNavLinkClass}>
               Main
+            </NavLink>
+            <NavLink to={"/users"} className={getNavLinkClass}>
+              Users
             </NavLink>
             <NavLink to={"/albums"} className={getNavLinkClass}>
               Albums
