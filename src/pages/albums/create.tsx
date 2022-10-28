@@ -1,6 +1,7 @@
 import React, { Suspense } from "react";
 import { ActionFunction, Await, Form, useLoaderData } from "react-router-dom";
 import Breadcrumbs from "../../components/breadcumbs/Breadcrumbs";
+import Select from "../../components/select/Select";
 import { User } from "../../types/user";
 import { loader as usersLoader } from "../users/";
 
@@ -15,21 +16,20 @@ const CreateAlbumPage = () => {
         className="grid max-w-3xl mx-auto"
       >
         <label htmlFor="">Owner</label>
-        <select className="rounded-sm border-2 px-2 py-1 mb-2">
-          <Suspense>
-            <Await resolve={userPromise}>
-              {(users) => (
-                <>
-                  {users.map(({ id, name }: User) => (
-                    <option value={id} key={id}>
-                      {name}
-                    </option>
-                  ))}
-                </>
-              )}
-            </Await>
-          </Suspense>
-        </select>
+        <Suspense>
+          <Await resolve={userPromise}>
+            {(users) => (
+              <>
+                <Select
+                  options={users.map((user: User) => ({
+                    key: user.id,
+                    value: user.name,
+                  }))}
+                />
+              </>
+            )}
+          </Await>
+        </Suspense>
         <label htmlFor="">Title</label>
         <input
           type="text"
@@ -51,5 +51,13 @@ const CreateAlbumPage = () => {
 export default CreateAlbumPage;
 export const action: ActionFunction = async ({ request }) => {
   const form = await request.formData();
-  console.log(...form);
+  fetch("https://jsonplaceholder.typicode.com/users", {
+    method: "POST",
+    body: JSON.stringify(Object.fromEntries([...form])),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => response.json())
+    .then((json) => console.log(json));
 };

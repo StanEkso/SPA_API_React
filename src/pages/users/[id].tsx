@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import { Await, LoaderFunctionArgs, useLoaderData } from "react-router-dom";
+import { Await, LoaderFunction, useLoaderData } from "react-router-dom";
 import AlbumList from "../../components/albumlist/AlbumList";
 import Breadcrumbs from "../../components/breadcumbs/Breadcrumbs";
 import Loader from "../../components/loader/Loader";
@@ -34,7 +34,7 @@ const UserPage = () => {
 };
 
 export default UserPage;
-export const loader = async ({ params }: LoaderFunctionArgs) => {
+export const loader: LoaderFunction = async ({ params }) => {
   const { id } = params;
   const userPromise = await fetch(
     `https://jsonplaceholder.typicode.com/users/${id}`

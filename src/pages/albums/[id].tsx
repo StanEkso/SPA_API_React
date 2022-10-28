@@ -1,10 +1,5 @@
 import React, { Suspense } from "react";
-import {
-  Await,
-  Link,
-  LoaderFunctionArgs,
-  useLoaderData,
-} from "react-router-dom";
+import { Await, Link, LoaderFunction, useLoaderData } from "react-router-dom";
 import Breadcrumbs from "../../components/breadcumbs/Breadcrumbs";
 import Loader from "../../components/loader/Loader";
 import PhotoList from "../../components/photo/PhotoList";
@@ -49,7 +44,7 @@ const AlbumPage = () => {
 
 export default AlbumPage;
 
-export const loader = async ({ params }: LoaderFunctionArgs) => {
+export const loader: LoaderFunction = async ({ params }) => {
   const albumRes = await fetch(
     "https://jsonplaceholder.typicode.com/albums/" + params.id
   );

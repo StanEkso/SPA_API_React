@@ -30,34 +30,46 @@ const router = createBrowserRouter([
       },
       {
         path: "/albums",
-        loader: albumsLoader,
-        element: <AlbumsPage />,
+        children: [
+          {
+            path: "/albums",
+            loader: albumsLoader,
+            element: <AlbumsPage />,
+            index: true,
+          },
+          {
+            path: "/albums/create",
+            element: <CreateAlbumPage />,
+            loader: usersPageLoader,
+            action: createAlbumAction,
+          },
+          {
+            path: "/albums/:id",
+            element: <AlbumPage />,
+            loader: albumLoader,
+          },
+        ],
       },
       {
-        path: "/users/",
-        element: <UsersPage />,
-        loader: usersPageLoader,
-      },
-      {
-        path: "/users/create",
-        element: <CreateUserPage />,
-        action: createUserAction,
-      },
-      {
-        path: "/users/:id",
-        element: <UserPage />,
-        loader: userLoader,
-      },
-      {
-        path: "/albums/:id",
-        element: <AlbumPage />,
-        loader: albumLoader,
-      },
-      {
-        path: "/albums/create",
-        element: <CreateAlbumPage />,
-        loader: usersPageLoader,
-        action: createAlbumAction,
+        path: "/users",
+        children: [
+          {
+            path: "/users",
+            element: <UsersPage />,
+            loader: usersPageLoader,
+            index: true,
+          },
+          {
+            path: "/users/create",
+            element: <CreateUserPage />,
+            action: createUserAction,
+          },
+          {
+            path: "/users/:id",
+            element: <UserPage />,
+            loader: userLoader,
+          },
+        ],
       },
       {
         path: "/404",
