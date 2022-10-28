@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { FC, Suspense } from "react";
 import { Await, LoaderFunction, useLoaderData } from "react-router-dom";
 import AlbumList from "../../components/albumlist/AlbumList";
 import Breadcrumbs from "../../components/breadcumbs/Breadcrumbs";
@@ -8,10 +8,9 @@ import { Album } from "../../types/album";
 import { User } from "../../types/user";
 import NotFoundPage from "../404";
 
-const UserPage = () => {
-  const { userPromise, albumsPromise } = useLoaderData() as Awaited<
-    ReturnType<typeof loader>
-  >;
+const UserPage: FC = () => {
+  const { userPromise, albumsPromise }: Awaited<ReturnType<typeof loader>> =
+    useLoaderData();
   return (
     <>
       <Breadcrumbs />

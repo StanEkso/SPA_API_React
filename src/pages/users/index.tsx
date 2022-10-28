@@ -1,11 +1,11 @@
-import React, { Suspense } from "react";
+import React, { FC, Suspense } from "react";
 import { useLoaderData, Await, LoaderFunction } from "react-router-dom";
 import Breadcrumbs from "../../components/breadcumbs/Breadcrumbs";
 import Loader from "../../components/loader/Loader";
 import UserList from "../../components/userlist/UserList";
 import { User } from "../../types/user";
-const UsersPage = () => {
-  const { userPromise } = useLoaderData() as ReturnType<typeof loader>;
+const UsersPage: FC = () => {
+  const { userPromise }: ReturnType<typeof loader> = useLoaderData();
   return (
     <>
       <Breadcrumbs />

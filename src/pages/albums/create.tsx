@@ -1,12 +1,12 @@
-import React, { Suspense } from "react";
+import React, { FC, Suspense } from "react";
 import { ActionFunction, Await, Form, useLoaderData } from "react-router-dom";
 import Breadcrumbs from "../../components/breadcumbs/Breadcrumbs";
 import Select from "../../components/select/Select";
 import { User } from "../../types/user";
 import { loader as usersLoader } from "../users/";
 
-const CreateAlbumPage = () => {
-  const { userPromise } = useLoaderData() as ReturnType<typeof usersLoader>;
+const CreateAlbumPage: FC = () => {
+  const { userPromise }: ReturnType<typeof usersLoader> = useLoaderData();
   return (
     <>
       <Breadcrumbs />
@@ -19,14 +19,12 @@ const CreateAlbumPage = () => {
         <Suspense>
           <Await resolve={userPromise}>
             {(users) => (
-              <>
-                <Select
-                  options={users.map((user: User) => ({
-                    key: user.id,
-                    value: user.name,
-                  }))}
-                />
-              </>
+              <Select
+                options={users.map((user: User) => ({
+                  key: user.id,
+                  value: user.name,
+                }))}
+              />
             )}
           </Await>
         </Suspense>

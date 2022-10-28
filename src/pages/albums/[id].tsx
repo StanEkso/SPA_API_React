@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { FC, Suspense } from "react";
 import { Await, Link, LoaderFunction, useLoaderData } from "react-router-dom";
 import Breadcrumbs from "../../components/breadcumbs/Breadcrumbs";
 import Loader from "../../components/loader/Loader";
@@ -7,10 +7,12 @@ import { Album } from "../../types/album";
 import { User } from "../../types/user";
 import NotFoundPage from "../404";
 
-const AlbumPage = () => {
-  const { album, photosPromise, userPromise } = useLoaderData() as Awaited<
-    ReturnType<typeof loader>
-  >;
+const AlbumPage: FC = () => {
+  const {
+    album,
+    photosPromise,
+    userPromise,
+  }: Awaited<ReturnType<typeof loader>> = useLoaderData();
   return (
     <div>
       <Breadcrumbs />
@@ -27,7 +29,7 @@ const AlbumPage = () => {
                   className="hover:underline hover:text-blue-600"
                 >
                   {user.name}
-                </Link>{" "}
+                </Link>
               </p>
             )}
           />

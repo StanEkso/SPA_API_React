@@ -1,8 +1,8 @@
-import React from "react";
+import React, { FC } from "react";
 import { ActionFunction, Form } from "react-router-dom";
 import Breadcrumbs from "../../components/breadcumbs/Breadcrumbs";
 
-const CreateUserPage = () => {
+const CreateUserPage: FC = () => {
   return (
     <>
       <Breadcrumbs />
