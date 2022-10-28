@@ -12,9 +12,9 @@ const AlbumList: FC<Props> = ({ albums }) => {
     <div>
       <h3 className="font-bold mb-2 text-2xl">Albums</h3>
       <div className="">
-        {albums.map((album) => (
+        {albums.map(({ id, title }) => (
           <div
-            key={album.id}
+            key={id}
             className="flex space-x-4 items-center hover:text-blue-600 hover:underline my-3"
           >
             <img
@@ -22,7 +22,7 @@ const AlbumList: FC<Props> = ({ albums }) => {
               className="w-6 h-6"
               alt=""
             />
-            <Link to={"/albums/" + album.id}>{album.title}</Link>
+            <Link to={"/albums/" + id}>{title}</Link>
           </div>
         ))}
       </div>

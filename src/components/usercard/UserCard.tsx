@@ -14,7 +14,7 @@ const UserCard: FC<Props> = ({
   return (
     <div className="rounded-md p-4 border-2 flex flex-col gap-1">
       <h3 className="font-bold">{name}</h3>
-      <p>Username: {username}</p>
+      <p>{username}</p>
 
       <p className="flex gap-2 items-center">
         <img

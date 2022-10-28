@@ -7,7 +7,7 @@ const PhotoCard: FC<Props> = ({ title, url }) => {
   return (
     <div className="rounded-sm border-2 p-2">
       <img src={url} alt={title} className="max-w-full" />
-      <h4>{title}</h4>
+      <h4 className="text-xl text-center mt-2">{title}</h4>
     </div>
   );
 };

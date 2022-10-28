@@ -24,14 +24,14 @@ const AlbumPage: FC = () => {
           <h3 className="font-bold mb-2 text-2xl">{album.title}</h3>
           <Await
             resolve={userPromise}
-            children={(user) => (
+            children={({ id, name }) => (
               <p>
                 Created by{" "}
                 <Link
-                  to={"/users/" + user.id}
+                  to={"/users/" + id}
                   className="hover:underline hover:text-blue-600"
                 >
-                  {user.name}
+                  {name}
                 </Link>
               </p>
             )}

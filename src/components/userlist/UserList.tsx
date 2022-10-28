@@ -10,13 +10,13 @@ const UserList: FC<UserListProps> = ({ users }) => {
   return (
     <div>
       <h3 className="font-bold mb-2 text-2xl">Users</h3>
-      {users.map((user) => (
-        <div key={user.id}>
+      {users.map(({ id, name }) => (
+        <div key={id}>
           <Link
-            to={`/users/${user.id}`}
+            to={`/users/${id}`}
             className="hover:underline hover:text-blue-600"
           >
-            {user.name}
+            {name}
           </Link>
         </div>
       ))}
