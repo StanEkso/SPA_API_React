@@ -5,7 +5,9 @@ interface Props {
 }
 
 const getOptionClass = (active: boolean) =>
-  active ? "px-2  bg-blue-700 text-white rounded-sm" : "px-2 ";
+  active
+    ? "px-2  bg-blue-700 text-white rounded-sm cursor-pointer"
+    : "px-2 cursor-pointer hover:bg-gray-100 ease-in duration-100";
 
 const Select: FC<Props> = ({ options }) => {
   const [selected, setSelected] = useState(options[0]);
@@ -36,6 +38,13 @@ const Select: FC<Props> = ({ options }) => {
         <option value={selected.key}></option>
       </select>
       <p onClick={() => setIsActive(!isActive)}>{selected.value} </p>
+      <button
+        onClick={() => setIsActive(!isActive)}
+        className="rotate-90 absolute top-1 right-1 scale-y-125 scale-x-75 opacity-50"
+        type="button"
+      >
+        {">"}
+      </button>
       {isActive && (
         <ul
           className="rounded-sm bg-white left-0 top-0 w-full absolute max-h-52 overflow-y-auto border-2"

@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import { ActionFunction, Form } from "react-router-dom";
 import Breadcrumbs from "../../components/breadcumbs/Breadcrumbs";
+import StyledInput from "../../components/styled/StyledInput";
 
 const CreateUserPage: FC = () => {
   return (
@@ -12,48 +13,22 @@ const CreateUserPage: FC = () => {
         className="grid max-w-3xl mx-auto"
       >
         <label htmlFor="">Name</label>
-        <input
-          type="text"
-          name="name"
-          className="rounded-sm border-2 px-2 py-1 mb-2"
-          placeholder="Bob"
-        />
+        <StyledInput type="text" name="name" placeholder="Bob" />
         <label htmlFor="">Username</label>
-        <input
-          type="text"
-          name="username"
-          className="rounded-sm border-2 px-2 py-1 mb-2"
-          placeholder="bobus2"
-        />
+        <StyledInput type="text" name="username" placeholder="bobus2" />
         <label htmlFor="">Email</label>
-        <input
+        <StyledInput
           type="email"
           name="email"
-          className="rounded-sm border-2 px-2 py-1  mb-2"
           placeholder="email@example.com"
         />
         <label htmlFor="">Phone</label>
-        <input
-          type="text"
-          name="phone"
-          className="rounded-sm border-2 px-2 py-1  mb-2"
-          placeholder="493-170-9623 x156"
-        />
+        <StyledInput type="text" name="phone" placeholder="493-170-9623 x156" />
         <label htmlFor="">Address</label>
 
         <div className="grid grid-cols-2 gap-4 mb-2">
-          <input
-            type="text"
-            name="city"
-            className="rounded-sm border-2 px-2 py-1"
-            placeholder="City"
-          />
-          <input
-            type="text"
-            name="street"
-            className="rounded-sm border-2 px-2 py-1"
-            placeholder="Street"
-          />
+          <StyledInput type="text" name="city" placeholder="City" />
+          <StyledInput type="text" name="street" placeholder="Street" />
         </div>
         <button
           type="submit"

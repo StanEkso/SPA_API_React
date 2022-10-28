@@ -2,6 +2,7 @@ import React, { FC, Suspense } from "react";
 import { ActionFunction, Await, Form, useLoaderData } from "react-router-dom";
 import Breadcrumbs from "../../components/breadcumbs/Breadcrumbs";
 import Select from "../../components/select/Select";
+import StyledInput from "../../components/styled/StyledInput";
 import { User } from "../../types/user";
 import { loader as usersLoader } from "../users/";
 
@@ -20,19 +21,18 @@ const CreateAlbumPage: FC = () => {
           <Await resolve={userPromise}>
             {(users) => (
               <Select
-                options={users.map((user: User) => ({
-                  key: user.id,
-                  value: user.name,
+                options={users.map(({ id, name }: User) => ({
+                  key: id,
+                  value: name,
                 }))}
               />
             )}
           </Await>
         </Suspense>
         <label htmlFor="">Title</label>
-        <input
+        <StyledInput
           type="text"
           name="title"
-          className="rounded-sm border-2 px-2 py-1 mb-2"
           placeholder="Beautiful name for album"
         />
         <button
