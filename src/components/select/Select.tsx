@@ -4,6 +4,9 @@ interface Props {
   options: { key: string | number; value: string }[];
 }
 
+const getOptionClass = (active: boolean) =>
+  active ? "px-2  bg-blue-700 text-white rounded-sm" : "px-2 ";
+
 const Select: FC<Props> = ({ options }) => {
   const [selected, setSelected] = useState(options[0]);
   const [isActive, setIsActive] = useState(false);
@@ -12,6 +15,21 @@ const Select: FC<Props> = ({ options }) => {
       setSelected(select);
       setIsActive(false);
     };
+  const handleKeyDown =
+    (select: { key: string | number; value: string }) =>
+    (e: React.KeyboardEvent) => {
+      switch (e.key) {
+        case " ":
+        case "SpaceBar":
+        case "Enter":
+          e.preventDefault();
+          setSelected(select);
+          setIsActive(false);
+          break;
+        default:
+          break;
+      }
+    };
   return (
     <div className="rounded-sm border-2 px-2 py-1 mb-2 relative">
       <select defaultValue={selected.key} name="userId" className="hidden">
@@ -19,14 +37,21 @@ const Select: FC<Props> = ({ options }) => {
       </select>
       <p onClick={() => setIsActive(!isActive)}>{selected.value} </p>
       {isActive && (
-        <ul className="rounded-sm px-2 py-1 bg-white left-0 top-0 w-full absolute max-h-48 overflow-y-auto border-2">
+        <ul
+          className="rounded-sm bg-white left-0 top-0 w-full absolute max-h-52 overflow-y-auto border-2"
+          aria-activedescendant={selected.value}
+          tabIndex={-1}
+          role="listbox"
+        >
           {options.map(({ key, value }) => (
             <li
               key={key}
+              role="option"
+              aria-selected={selected.key === key}
+              tabIndex={0}
               onClick={handleSelect({ key, value })}
-              className={
-                selected.key === key ? "text-blue-500 border-b-2" : "border-b-2"
-              }
+              onKeyDown={handleKeyDown({ key, value })}
+              className={getOptionClass(selected.key === key)}
             >
               {value}
             </li>
