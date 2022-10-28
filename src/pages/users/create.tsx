@@ -67,7 +67,7 @@ const CreateUserPage: FC = () => {
 };
 
 export default CreateUserPage;
-export const action: ActionFunction = async ({ request, params }) => {
+export const action: ActionFunction = async ({ request }) => {
   const form = await request.formData();
   fetch("https://jsonplaceholder.typicode.com/users", {
     method: "POST",

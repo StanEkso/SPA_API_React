@@ -6,7 +6,7 @@ import { User } from "../../types/user";
 import { loader as usersLoader } from "../users/";
 
 const CreateAlbumPage: FC = () => {
-  const { userPromise }: ReturnType<typeof usersLoader> = useLoaderData();
+  const { userPromise } = useLoaderData() as ReturnType<typeof usersLoader>;
   return (
     <>
       <Breadcrumbs />

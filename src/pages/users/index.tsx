@@ -1,11 +1,11 @@
 import React, { FC, Suspense } from "react";
-import { useLoaderData, Await, LoaderFunction } from "react-router-dom";
+import { useLoaderData, Await } from "react-router-dom";
 import Breadcrumbs from "../../components/breadcumbs/Breadcrumbs";
 import Loader from "../../components/loader/Loader";
 import UserList from "../../components/userlist/UserList";
 import { User } from "../../types/user";
 const UsersPage: FC = () => {
-  const { userPromise }: ReturnType<typeof loader> = useLoaderData();
+  const { userPromise } = useLoaderData() as ReturnType<typeof loader>;
   return (
     <>
       <Breadcrumbs />
@@ -21,7 +21,7 @@ const UsersPage: FC = () => {
 
 export default UsersPage;
 
-export const loader: LoaderFunction = () => {
+export const loader = () => {
   const userPromise: Promise<User[]> = new Promise((resolve) => {
     setTimeout(() => {
       const users = fetch("https://jsonplaceholder.typicode.com/users").then(

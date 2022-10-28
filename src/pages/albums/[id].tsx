@@ -1,5 +1,10 @@
 import React, { FC, Suspense } from "react";
-import { Await, Link, LoaderFunction, useLoaderData } from "react-router-dom";
+import {
+  Await,
+  Link,
+  LoaderFunctionArgs,
+  useLoaderData,
+} from "react-router-dom";
 import Breadcrumbs from "../../components/breadcumbs/Breadcrumbs";
 import Loader from "../../components/loader/Loader";
 import PhotoList from "../../components/photo/PhotoList";
@@ -8,11 +13,9 @@ import { User } from "../../types/user";
 import NotFoundPage from "../404";
 
 const AlbumPage: FC = () => {
-  const {
-    album,
-    photosPromise,
-    userPromise,
-  }: Awaited<ReturnType<typeof loader>> = useLoaderData();
+  const { album, photosPromise, userPromise } = useLoaderData() as Awaited<
+    ReturnType<typeof loader>
+  >;
   return (
     <div>
       <Breadcrumbs />
@@ -46,7 +49,7 @@ const AlbumPage: FC = () => {
 
 export default AlbumPage;
 
-export const loader: LoaderFunction = async ({ params }) => {
+export const loader = async ({ params }: LoaderFunctionArgs) => {
   const albumRes = await fetch(
     "https://jsonplaceholder.typicode.com/albums/" + params.id
   );
