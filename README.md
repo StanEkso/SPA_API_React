@@ -2,7 +2,12 @@
 
 This project is example of "multi-page SPA" using React-Router.
 
+Visit http://spa-lemon.vercel.app/ to checkout it by yourself.
+
 ## Preview on Desktop
+
+![Desktop Preview, Main Page](./preview/preview_main.png "Desktop Main Page")
+![Desktop Preview, Skeleton User Page](./preview/preview_sleleton.png "Desktop User Page")
 
 ## Technologies
 
@@ -20,7 +25,11 @@ This project is example of "multi-page SPA" using React-Router.
   - Users Page
   - Album Page
 - Page for every user/album and cross-links.
-- Loaders for better UX
+- Skeletons for best UX:
+  - For lists: f.e. album list, user list and etc.
+  - For cards: f.e. user card, photo card
+  - Etc
+- App is works fine for many devices (320px-1920px)
 
 ## Local install
 
