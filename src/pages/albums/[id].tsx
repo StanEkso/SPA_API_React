@@ -8,39 +8,55 @@ import {
 import Breadcrumbs from "../../components/breadcumbs/Breadcrumbs";
 import Loader from "../../components/loader/Loader";
 import PhotoList from "../../components/photo/PhotoList";
+import CreatedBySkeleton from "../../components/skeletons/CreatedBySkeleton";
+import ListSkeleton from "../../components/skeletons/ListSkeleton";
+import PhotoCardSkeleton from "../../components/skeletons/PhotoCardSkeleton";
 import { Album } from "../../types/album";
 import { User } from "../../types/user";
-import NotFoundPage from "../404";
 
 const AlbumPage: FC = () => {
-  const { album, photosPromise, userPromise } = useLoaderData() as Awaited<
-    ReturnType<typeof loader>
-  >;
+  const { albumRes } = useLoaderData() as Awaited<ReturnType<typeof loader>>;
   return (
     <div>
       <Breadcrumbs />
       <Suspense fallback={<Loader />}>
-        <div className="mb-4">
-          <h3 className="font-bold mb-2 text-2xl">{album.title}</h3>
-          <Await
-            resolve={userPromise}
-            children={({ id, name }) => (
-              <p>
-                Created by{" "}
-                <Link
-                  to={"/users/" + id}
-                  className="hover:underline hover:text-blue-600"
-                >
-                  {name}
-                </Link>
-              </p>
-            )}
-          />
-        </div>
         <Await
-          resolve={photosPromise}
-          errorElement={<NotFoundPage />}
-          children={(photos) => <PhotoList photos={photos} />}
+          resolve={albumRes}
+          children={(album) => (
+            <>
+              <div className="mb-4">
+                <h3 className="font-bold mb-2 text-2xl">{album.title}</h3>
+                <Suspense fallback={<CreatedBySkeleton />}>
+                  <Await
+                    resolve={fetch(
+                      `https://jsonplaceholder.typicode.com/users/${album.userId}`
+                    ).then((r) => r.json())}
+                    children={({ name, id }: User) => (
+                      <p>
+                        Created by{" "}
+                        <Link
+                          to={"/users/" + id}
+                          className="hover:underline hover:text-blue-600"
+                        >
+                          {name}
+                        </Link>
+                      </p>
+                    )}
+                  />
+                </Suspense>
+                <Suspense
+                  fallback={<ListSkeleton element={PhotoCardSkeleton} grid />}
+                >
+                  <Await
+                    resolve={fetch(
+                      `https://jsonplaceholder.typicode.com/albums/${album.id}/photos`
+                    ).then((r) => r.json())}
+                    children={(photos) => <PhotoList photos={photos} />}
+                  />
+                </Suspense>
+              </div>
+            </>
+          )}
         />
       </Suspense>
     </div>
@@ -49,24 +65,11 @@ const AlbumPage: FC = () => {
 
 export default AlbumPage;
 
-export const loader = async ({ params }: LoaderFunctionArgs) => {
-  const albumRes = await fetch(
+export const loader = ({ params }: LoaderFunctionArgs) => {
+  const albumRes: Promise<Album> = fetch(
     "https://jsonplaceholder.typicode.com/albums/" + params.id
-  );
-  if (albumRes.status !== 200) {
-    throw new Response("Not Found", { status: 404 });
-  }
-  const album: Album = await albumRes.json();
-
-  const userPromise: Promise<User> = fetch(
-    `https://jsonplaceholder.typicode.com/users/${album.userId}`
-  ).then((r) => r.json());
-  const photosPromise = fetch(
-    "https://jsonplaceholder.typicode.com/albums/" + params.id + "/photos"
   ).then((r) => r.json());
   return {
-    album,
-    photosPromise,
-    userPromise,
+    albumRes,
   };
 };

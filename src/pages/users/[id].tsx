@@ -2,7 +2,8 @@ import React, { FC, Suspense } from "react";
 import { Await, LoaderFunctionArgs, useLoaderData } from "react-router-dom";
 import AlbumList from "../../components/albumlist/AlbumList";
 import Breadcrumbs from "../../components/breadcumbs/Breadcrumbs";
-import Loader from "../../components/loader/Loader";
+import ListSkeleton from "../../components/skeletons/ListSkeleton";
+import UserCardSkeleton from "../../components/skeletons/UserCardSkeleton";
 import UserCard from "../../components/usercard/UserCard";
 import { Album } from "../../types/album";
 import { User } from "../../types/user";
@@ -15,7 +16,14 @@ const UserPage: FC = () => {
     <>
       <Breadcrumbs />
       <div className="grid md:grid-cols-[1fr_2fr] gap-8 lg:gap-10 xl:gap-12">
-        <Suspense fallback={<Loader />}>
+        <Suspense
+          fallback={
+            <>
+              <UserCardSkeleton />
+              <ListSkeleton withTitle />
+            </>
+          }
+        >
           <Await
             resolve={userPromise}
             errorElement={<NotFoundPage />}
@@ -33,8 +41,7 @@ const UserPage: FC = () => {
 };
 
 export default UserPage;
-export const loader = async ({ params }: LoaderFunctionArgs) => {
-  const { id } = params;
+export const loader = async ({ params: { id } }: LoaderFunctionArgs) => {
   const userPromise = await fetch(
     `https://jsonplaceholder.typicode.com/users/${id}`
   );
@@ -44,5 +51,8 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
   const albumsPromise: Promise<Album[]> = fetch(
     `https://jsonplaceholder.typicode.com/users/${id}/albums`
   ).then((r) => r.json());
-  return { userPromise: userPromise.json() as Promise<User>, albumsPromise };
+  return {
+    userPromise: userPromise.json() as Promise<User>,
+    albumsPromise,
+  };
 };

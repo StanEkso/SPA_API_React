@@ -1,7 +1,7 @@
 import React, { FC, Suspense } from "react";
 import { useLoaderData, Await } from "react-router-dom";
 import Breadcrumbs from "../../components/breadcumbs/Breadcrumbs";
-import Loader from "../../components/loader/Loader";
+import ListSkeleton from "../../components/skeletons/ListSkeleton";
 import UserList from "../../components/userlist/UserList";
 import { User } from "../../types/user";
 const UsersPage: FC = () => {
@@ -9,7 +9,7 @@ const UsersPage: FC = () => {
   return (
     <>
       <Breadcrumbs />
-      <Suspense fallback={<Loader />}>
+      <Suspense fallback={<ListSkeleton withTitle />}>
         <Await
           resolve={userPromise}
           children={(users) => <UserList users={users} />}
