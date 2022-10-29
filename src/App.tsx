@@ -29,43 +29,43 @@ const router = createBrowserRouter([
         index: true,
       },
       {
-        path: "/albums",
+        path: "albums/",
         children: [
           {
-            path: "/albums",
+            path: "",
             loader: albumsLoader,
             element: <AlbumsPage />,
             index: true,
           },
           {
-            path: "/albums/create",
+            path: "create/",
             element: <CreateAlbumPage />,
             loader: usersPageLoader,
             action: createAlbumAction,
           },
           {
-            path: "/albums/:id",
+            path: ":id/",
             element: <AlbumPage />,
             loader: albumLoader,
           },
         ],
       },
       {
-        path: "/users",
+        path: "users/",
         children: [
           {
-            path: "/users",
+            path: "",
             element: <UsersPage />,
             loader: usersPageLoader,
             index: true,
           },
           {
-            path: "/users/create",
+            path: "create/",
             element: <CreateUserPage />,
             action: createUserAction,
           },
           {
-            path: "/users/:id",
+            path: ":id/",
             element: <UserPage />,
             loader: userLoader,
           },
