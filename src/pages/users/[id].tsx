@@ -1,12 +1,11 @@
 import React, { FC, Suspense } from "react";
 import { Await, LoaderFunctionArgs, useLoaderData } from "react-router-dom";
+import { getUserAlbums, getUserById } from "../../api";
 import AlbumList from "../../components/albumlist/AlbumList";
 import Breadcrumbs from "../../components/breadcumbs/Breadcrumbs";
 import ListSkeleton from "../../components/skeletons/ListSkeleton";
 import UserCardSkeleton from "../../components/skeletons/UserCardSkeleton";
 import UserCard from "../../components/usercard/UserCard";
-import { Album } from "../../types/album";
-import { User } from "../../types/user";
 import NotFoundPage from "../404";
 const UserPage: FC = () => {
   const { userPromise, albumsPromise } = useLoaderData() as Awaited<
@@ -41,18 +40,9 @@ const UserPage: FC = () => {
 };
 
 export default UserPage;
-export const loader = async ({ params: { id } }: LoaderFunctionArgs) => {
-  const userPromise = await fetch(
-    `https://jsonplaceholder.typicode.com/users/${id}`
-  );
-  if (userPromise.status !== 200) {
-    throw new Response("Not found", { status: 404 });
-  }
-  const albumsPromise: Promise<Album[]> = fetch(
-    `https://jsonplaceholder.typicode.com/users/${id}/albums`
-  ).then((r) => r.json());
+export const loader = ({ params: { id } }: LoaderFunctionArgs) => {
   return {
-    userPromise: userPromise.json() as Promise<User>,
-    albumsPromise,
+    userPromise: getUserById(id ? +id : 0),
+    albumsPromise: getUserAlbums(id ? +id : 0),
   };
 };

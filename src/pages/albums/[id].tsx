@@ -5,32 +5,32 @@ import {
   LoaderFunctionArgs,
   useLoaderData,
 } from "react-router-dom";
+import { getAlbumById, getAlbumPhotos, getUserById } from "../../api";
 import Breadcrumbs from "../../components/breadcumbs/Breadcrumbs";
-import Loader from "../../components/loader/Loader";
 import PhotoList from "../../components/photo/PhotoList";
 import CreatedBySkeleton from "../../components/skeletons/CreatedBySkeleton";
 import ListSkeleton from "../../components/skeletons/ListSkeleton";
 import PhotoCardSkeleton from "../../components/skeletons/PhotoCardSkeleton";
-import { Album } from "../../types/album";
+import TitleSkeleton from "../../components/skeletons/TitleSkeleton";
 import { User } from "../../types/user";
 
 const AlbumPage: FC = () => {
-  const { albumRes } = useLoaderData() as Awaited<ReturnType<typeof loader>>;
+  const { albumPromise, photosPromise } = useLoaderData() as Awaited<
+    ReturnType<typeof loader>
+  >;
   return (
     <div>
       <Breadcrumbs />
-      <Suspense fallback={<Loader />}>
+      <Suspense fallback={<TitleSkeleton />}>
         <Await
-          resolve={albumRes}
+          resolve={albumPromise}
           children={(album) => (
             <>
               <div className="mb-4">
                 <h3 className="font-bold mb-2 text-2xl">{album.title}</h3>
                 <Suspense fallback={<CreatedBySkeleton />}>
                   <Await
-                    resolve={fetch(
-                      `https://jsonplaceholder.typicode.com/users/${album.userId}`
-                    ).then((r) => r.json())}
+                    resolve={getUserById(album.userId)}
                     children={({ name, id }: User) => (
                       <p>
                         Created by{" "}
@@ -44,19 +44,15 @@ const AlbumPage: FC = () => {
                     )}
                   />
                 </Suspense>
-                <Suspense
-                  fallback={<ListSkeleton element={PhotoCardSkeleton} grid />}
-                >
-                  <Await
-                    resolve={fetch(
-                      `https://jsonplaceholder.typicode.com/albums/${album.id}/photos`
-                    ).then((r) => r.json())}
-                    children={(photos) => <PhotoList photos={photos} />}
-                  />
-                </Suspense>
               </div>
             </>
           )}
+        />
+      </Suspense>
+      <Suspense fallback={<ListSkeleton element={PhotoCardSkeleton} grid />}>
+        <Await
+          resolve={photosPromise}
+          children={(photos) => <PhotoList photos={photos} />}
         />
       </Suspense>
     </div>
@@ -65,11 +61,9 @@ const AlbumPage: FC = () => {
 
 export default AlbumPage;
 
-export const loader = ({ params }: LoaderFunctionArgs) => {
-  const albumRes: Promise<Album> = fetch(
-    "https://jsonplaceholder.typicode.com/albums/" + params.id
-  ).then((r) => r.json());
+export const loader = ({ params: { id } }: LoaderFunctionArgs) => {
   return {
-    albumRes,
+    albumPromise: getAlbumById(id ? +id : 0),
+    photosPromise: getAlbumPhotos(id ? +id : 0),
   };
 };

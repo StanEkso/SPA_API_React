@@ -1,5 +1,6 @@
 import React, { Suspense } from "react";
 import { Await, LoaderFunction, useLoaderData } from "react-router-dom";
+import { getAlbums } from "../../api";
 import AlbumList from "../../components/albumlist/AlbumList";
 import Breadcrumbs from "../../components/breadcumbs/Breadcrumbs";
 import ListSkeleton from "../../components/skeletons/ListSkeleton";
@@ -20,10 +21,7 @@ const AlbumsPage = () => {
 
 export default AlbumsPage;
 export const loader: LoaderFunction = () => {
-  const albumsPromise = fetch(
-    "https://jsonplaceholder.typicode.com/albums"
-  ).then((r) => r.json());
   return {
-    albumsPromise,
+    albumsPromise: getAlbums(),
   };
 };
