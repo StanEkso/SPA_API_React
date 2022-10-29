@@ -7,7 +7,7 @@ Visit http://spa-lemon.vercel.app/ to checkout it by yourself.
 ## Preview on Desktop
 
 ![Desktop Preview, Main Page](./preview/preview_main.png "Desktop Main Page")
-![Desktop Preview, Skeleton User Page](./preview/preview_sleleton.png "Desktop User Page")
+![Desktop Preview, Skeleton User Page](./preview/preview_skeleton.png "Desktop User Page")
 
 ## Technologies
 
