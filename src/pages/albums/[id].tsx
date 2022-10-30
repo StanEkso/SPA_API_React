@@ -13,6 +13,7 @@ import ListSkeleton from "../../components/skeletons/ListSkeleton";
 import PhotoCardSkeleton from "../../components/skeletons/PhotoCardSkeleton";
 import TitleSkeleton from "../../components/skeletons/TitleSkeleton";
 import { User } from "../../types/user";
+import { NotFoundRedirect } from "../404";
 
 const AlbumPage: FC = () => {
   const { albumPromise, photosPromise } = useLoaderData() as Awaited<
@@ -23,6 +24,7 @@ const AlbumPage: FC = () => {
       <Breadcrumbs />
       <Suspense fallback={<TitleSkeleton />}>
         <Await
+          errorElement={<NotFoundRedirect />}
           resolve={albumPromise}
           children={(album) => (
             <>

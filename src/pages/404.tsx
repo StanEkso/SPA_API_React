@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 const NotFoundPage: FC = () => {
   return (
@@ -11,5 +11,5 @@ const NotFoundPage: FC = () => {
     </div>
   );
 };
-
+export const NotFoundRedirect = () => <Navigate to="/404" />;
 export default NotFoundPage;

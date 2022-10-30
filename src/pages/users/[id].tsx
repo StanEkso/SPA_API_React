@@ -6,7 +6,7 @@ import Breadcrumbs from "../../components/breadcumbs/Breadcrumbs";
 import ListSkeleton from "../../components/skeletons/ListSkeleton";
 import UserCardSkeleton from "../../components/skeletons/UserCardSkeleton";
 import UserCard from "../../components/usercard/UserCard";
-import NotFoundPage from "../404";
+import { NotFoundRedirect } from "../404";
 const UserPage: FC = () => {
   const { userPromise, albumsPromise } = useLoaderData() as Awaited<
     ReturnType<typeof loader>
@@ -25,12 +25,12 @@ const UserPage: FC = () => {
         >
           <Await
             resolve={userPromise}
-            errorElement={<NotFoundPage />}
+            errorElement={<NotFoundRedirect />}
             children={(user) => <UserCard {...user} />}
           />
           <Await
             resolve={albumsPromise}
-            errorElement={<NotFoundPage />}
+            errorElement={<NotFoundRedirect />}
             children={(albums) => <AlbumList albums={albums} />}
           />
         </Suspense>

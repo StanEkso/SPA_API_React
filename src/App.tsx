@@ -30,6 +30,7 @@ const router = createBrowserRouter([
       },
       {
         path: "albums/",
+        errorElement: <NotFoundPage />,
         children: [
           {
             path: "",
