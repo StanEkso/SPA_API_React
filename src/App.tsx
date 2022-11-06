@@ -1,13 +1,9 @@
 import React from "react";
-import {
-  createBrowserRouter,
-  Navigate,
-  RouterProvider,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "./components/layout/Layout";
 import AlbumPage, { loader as albumLoader } from "./pages/albums/[id]";
 import UsersPage, { loader as usersPageLoader } from "./pages/users/";
-import NotFoundPage from "./pages/404";
+import NotFoundPage, { NotFoundRedirect } from "./pages/404";
 import UserPage, { loader as userLoader } from "./pages/users/[id]";
 import MainPage from "./pages";
 import CreateUserPage, {
@@ -21,7 +17,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
-    errorElement: <Navigate to="/404" />,
+    errorElement: <NotFoundRedirect />,
     children: [
       {
         path: "/",
@@ -30,7 +26,7 @@ const router = createBrowserRouter([
       },
       {
         path: "albums/",
-        errorElement: <NotFoundPage />,
+        errorElement: <NotFoundRedirect />,
         children: [
           {
             path: "",
