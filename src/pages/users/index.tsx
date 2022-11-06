@@ -1,21 +1,17 @@
 import React, { FC, Suspense } from "react";
 import { useLoaderData, Await } from "react-router-dom";
 import { getUsers } from "../../api";
-import Breadcrumbs from "../../components/breadcumbs/Breadcrumbs";
 import ListSkeleton from "../../components/skeletons/ListSkeleton";
 import UserList from "../../components/userlist/UserList";
 const UsersPage: FC = () => {
   const { userPromise } = useLoaderData() as ReturnType<typeof loader>;
   return (
-    <>
-      <Breadcrumbs />
-      <Suspense fallback={<ListSkeleton withTitle />}>
-        <Await
-          resolve={userPromise}
-          children={(users) => <UserList users={users} />}
-        />
-      </Suspense>
-    </>
+    <Suspense fallback={<ListSkeleton withTitle />}>
+      <Await
+        resolve={userPromise}
+        children={(users) => <UserList users={users} />}
+      />
+    </Suspense>
   );
 };
 

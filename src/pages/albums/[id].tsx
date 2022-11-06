@@ -6,7 +6,6 @@ import {
   useLoaderData,
 } from "react-router-dom";
 import { getAlbumById, getAlbumPhotos, getUserById } from "../../api";
-import Breadcrumbs from "../../components/breadcumbs/Breadcrumbs";
 import PhotoList from "../../components/photo/PhotoList";
 import CreatedBySkeleton from "../../components/skeletons/CreatedBySkeleton";
 import ListSkeleton from "../../components/skeletons/ListSkeleton";
@@ -21,7 +20,6 @@ const AlbumPage: FC = () => {
   >;
   return (
     <div>
-      <Breadcrumbs />
       <Suspense fallback={<TitleSkeleton />}>
         <Await
           errorElement={<NotFoundRedirect />}

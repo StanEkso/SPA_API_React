@@ -2,7 +2,6 @@ import React, { FC, Suspense } from "react";
 import { Await, LoaderFunctionArgs, useLoaderData } from "react-router-dom";
 import { getUserAlbums, getUserById } from "../../api";
 import AlbumList from "../../components/albumlist/AlbumList";
-import Breadcrumbs from "../../components/breadcumbs/Breadcrumbs";
 import ListSkeleton from "../../components/skeletons/ListSkeleton";
 import UserCardSkeleton from "../../components/skeletons/UserCardSkeleton";
 import UserCard from "../../components/usercard/UserCard";
@@ -12,30 +11,27 @@ const UserPage: FC = () => {
     ReturnType<typeof loader>
   >;
   return (
-    <>
-      <Breadcrumbs />
-      <div className="grid md:grid-cols-[1fr_2fr] gap-8 lg:gap-10 xl:gap-12">
-        <Suspense
-          fallback={
-            <>
-              <UserCardSkeleton />
-              <ListSkeleton withTitle />
-            </>
-          }
-        >
-          <Await
-            resolve={userPromise}
-            errorElement={<NotFoundRedirect />}
-            children={(user) => <UserCard {...user} />}
-          />
-          <Await
-            resolve={albumsPromise}
-            errorElement={<NotFoundRedirect />}
-            children={(albums) => <AlbumList albums={albums} />}
-          />
-        </Suspense>
-      </div>
-    </>
+    <div className="grid md:grid-cols-[1fr_2fr] gap-8 lg:gap-10 xl:gap-12">
+      <Suspense
+        fallback={
+          <>
+            <UserCardSkeleton />
+            <ListSkeleton withTitle />
+          </>
+        }
+      >
+        <Await
+          resolve={userPromise}
+          errorElement={<NotFoundRedirect />}
+          children={(user) => <UserCard {...user} />}
+        />
+        <Await
+          resolve={albumsPromise}
+          errorElement={<NotFoundRedirect />}
+          children={(albums) => <AlbumList albums={albums} />}
+        />
+      </Suspense>
+    </div>
   );
 };
 

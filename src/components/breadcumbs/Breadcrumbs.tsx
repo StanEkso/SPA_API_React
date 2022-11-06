@@ -9,10 +9,10 @@ const getNavLinkClass = ({ isActive }: { isActive: boolean }) =>
 interface BreadcrumbsProps {
   separator?: string;
 }
-
+const EXCLUDED_PATHS = ["/", "/404"];
 const Breadcrumbs: FC<BreadcrumbsProps> = ({ separator = " >" }) => {
   const { pathname } = useLocation();
-  if (pathname === "/") return null;
+  if (EXCLUDED_PATHS.includes(pathname)) return null;
   return (
     <div className="flex gap-2 text-md border-b-2 mb-2">
       {["Main", ...pathname.split("/").slice(1)].map((el, i, arr) => (

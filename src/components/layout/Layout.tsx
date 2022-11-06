@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import { NavLink, Outlet } from "react-router-dom";
+import Breadcrumbs from "../breadcumbs/Breadcrumbs";
 const getNavLinkClass = ({ isActive }: { isActive: boolean }) =>
   isActive ? "text-black underline underline-offset-4" : "text-gray-500";
 const Layout: FC = () => {
@@ -22,6 +23,7 @@ const Layout: FC = () => {
         </div>
       </header>
       <main className="mx-3 sm:mx-5 md:mx-8 lg:mx-14 xl:mx-20 2xl:mx-32 text-xl flex flex-col">
+        <Breadcrumbs />
         <Outlet />
       </main>
       <footer className="sticky top-full border-t-2 bg-white">
